@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import './App.css';
-import SignIn from './components/SignIn'
+import '../App.css';
+import SignIn from '../components/SignIn'
 import {connect} from 'react-redux'
 import LoadingBar from 'react-redux-loading'
-import {handleInitialData} from './actions/shared'
+import {handleInitialData} from '../actions/shared'
 
 class App extends Component {
 
