@@ -27,9 +27,9 @@ class App extends Component {
     }
 }
 
-function mapStateToProps({users}) {
+function mapStateToProps(state) {
     return {
-        loading : users.length === 0
+        loading : state.users.noUser === 'yes'
     }
 }
 

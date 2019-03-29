@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
 
 class SignIn extends Component {
     handleSubmit = (e) => {
@@ -21,20 +22,29 @@ class SignIn extends Component {
     }
 
     render() {
-        const users = [{id: 'sarahedo', name: 'Sarah Edo'}, {id: 'tylermcginnis', name: 'Tyler McGinnis'}]
-        return <div>
-            <h3>Sign In</h3>
-            <form onSubmit={this.handleSubmit}>
-                <div>
-                    <select id='user-list' onChange={this.handleUserSelect}>
-                        <option value=''>Choose one</option>
-                        {users.map(user => <option key={user.id} value={user.id}>{user.name}</option>)}
-                    </select>
-                </div>
-                <button type='submit'>Submit</button>
-            </form>
-        </div>
+        const {users} = this.props
+        return (
+            <div>
+                <h3>Sign In</h3>
+                <form onSubmit={this.handleSubmit}>
+                    <div>
+                        <select id='user-list' onChange={this.handleUserSelect}>
+                            <option value=''>Choose one</option>
+                            {Object.keys(users).map(id => <option key={id} value={id}>{users[id].name}</option>)}
+                        </select>
+                    </div>
+                    <button type='submit'>Submit</button>
+                </form>
+            </div>
+        )
     }
 }
 
-export default SignIn
+function mapStateToProps(state) {
+    const {users} = state
+    return {
+        users
+    }
+}
+
+export default connect(mapStateToProps)(SignIn)
