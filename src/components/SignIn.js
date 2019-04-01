@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import {handleLoginUser} from '../actions/authedUser'
 
 class SignIn extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
-        //TODO
+        this.props.dispatch(handleLoginUser(this.state.chosenUserId))
     }
 
     state = {
@@ -28,12 +29,12 @@ class SignIn extends Component {
                 <h3>Sign In</h3>
                 <form onSubmit={this.handleSubmit}>
                     <div>
-                        <select id='user-list' onChange={this.handleUserSelect}>
+                        <select id='user-list' onChange={this.handleUserSelect} value={this.state.chosenUserId}>
                             <option value=''>Choose one</option>
                             {Object.keys(users).map(id => <option key={id} value={id}>{users[id].name}</option>)}
                         </select>
                     </div>
-                    <button type='submit'>Submit</button>
+                    <button type='submit' disabled={this.state.chosenUserId === ''}>Submit</button>
                 </form>
             </div>
         )
