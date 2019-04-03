@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import '../App.css';
 import SignIn from '../components/SignIn'
 import {connect} from 'react-redux'
 import LoadingBar from 'react-redux-loading'
 import {handleInitialData} from '../actions/shared'
+import Home from './Home'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import Nav from "./Nav";
 
 class App extends Component {
 
@@ -14,15 +16,21 @@ class App extends Component {
 
     render() {
     return (
-        <Fragment>
-            <LoadingBar/>
-            <div className="App">
-                {this.props.loading
-                    ? null
-                    : <SignIn/>
-                }
-            </div>
-        </Fragment>
+        <Router>
+            <Fragment>
+                <LoadingBar/>
+                <div className="App">
+                    <Nav/>
+                    {this.props.loading
+                        ? null
+                        : <div>
+                            <Route path='/' exact component={Home}/>
+                            <Route path='/signin' component={SignIn }/>
+                        </div>
+                    }
+                </div>
+            </Fragment>
+        </Router>
     );
     }
 }

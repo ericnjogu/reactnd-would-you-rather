@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {handleLoginUser} from '../actions/authedUser'
+import {Redirect} from 'react-router-dom'
 
 class SignIn extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.dispatch(handleLoginUser(this.state.chosenUserId))
+
     }
 
     state = {
@@ -23,7 +25,10 @@ class SignIn extends Component {
     }
 
     render() {
-        const {users} = this.props
+        const {users, authedUser} = this.props
+        if (authedUser !== null) {
+            return <Redirect to='/'/>
+        }
         return (
             <div>
                 <h3>Sign In</h3>
@@ -42,9 +47,10 @@ class SignIn extends Component {
 }
 
 function mapStateToProps(state) {
-    const {users} = state
+    const {users, authedUser} = state
     return {
-        users
+        users,
+        authedUser
     }
 }
 
