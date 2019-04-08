@@ -1,8 +1,15 @@
 import React, {Component, Fragment} from 'react'
 import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {handleLogoutUser} from "../actions/authedUser";
 
 class Nav extends Component {
+    handleLogout = (e) => {
+        e.preventDefault()
+        this.props.dispatch(handleLogoutUser())
+
+    }
+
     render() {
         const {username} = this.props
         return (
@@ -26,9 +33,7 @@ class Nav extends Component {
                                 Welcome, {username}
                             </li>
                             <li>
-                                <NavLink to='/signout'>
-                                    Sign Out
-                                </NavLink>
+                                <a href='/logout' onClick={this.handleLogout}>Sign Out</a>
                             </li>
                         </Fragment>
                     }
