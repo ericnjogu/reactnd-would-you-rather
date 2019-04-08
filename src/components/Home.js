@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PrivateComponent from './PrivateComponent'
 
-export default class Home extends Component {
+export default class Home extends PrivateComponent {
     render() {
-        return <div>Home</div>
+        const redirect = super.render()
+        return <div>{redirect}Home</div>
     }
 }

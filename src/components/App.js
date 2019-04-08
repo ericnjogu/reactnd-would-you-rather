@@ -15,29 +15,29 @@ class App extends Component {
     }
 
     render() {
-    return (
-        <Router>
-            <Fragment>
-                <LoadingBar/>
-                <div className="App">
-                    <Nav/>
-                    {this.props.loading
-                        ? null
-                        : <div>
-                            <Route path='/' exact component={Home}/>
-                            <Route path='/signin' component={SignIn }/>
-                        </div>
-                    }
-                </div>
-            </Fragment>
-        </Router>
-    );
+        return (
+            <Router>
+                <Fragment>
+                    <LoadingBar/>
+                    <div className="App">
+                        <Nav/>
+                        {this.props.loading
+                            ? null
+                            : <div>
+                                <Route path='/' exact component={Home}/>
+                                <Route path='/signin' component={SignIn }/>
+                            </div>
+                        }
+                    </div>
+                </Fragment>
+            </Router>
+        );
     }
 }
 
 function mapStateToProps(state) {
     return {
-        loading : state.users.noUser === 'yes'
+        loading : state.users.noUser === 'yes',
     }
 }
 
