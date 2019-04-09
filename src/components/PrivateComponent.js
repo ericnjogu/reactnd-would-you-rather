@@ -5,7 +5,11 @@ import {Redirect} from 'react-router-dom'
 class PrivateComponent extends Component {
     render() {
         const {authedUser} = this.props
-        return authedUser === null ? <Redirect to='/signin'/> : null
+        const redirect = {
+            pathname: '/signin',
+            search: `?from=${this.props.location.pathname}`
+        }
+        return authedUser === null ? <Redirect to={redirect}/> : null
     }
 }
 

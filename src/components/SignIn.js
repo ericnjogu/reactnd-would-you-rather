@@ -25,9 +25,11 @@ class SignIn extends Component {
     }
 
     render() {
-        const {users, authedUser} = this.props
+        const {users, authedUser, location} = this.props
         if (authedUser !== null) {
-            return <Redirect to='/'/>
+            const search = location.search
+            const redirect = search === "" ? '/' : new URLSearchParams(search).get('from')
+            return <Redirect to={redirect}/>
         }
         return (
             <div>
