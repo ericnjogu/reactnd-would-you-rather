@@ -20,6 +20,11 @@ class Nav extends Component {
                             Home
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink to='new-question' activeClassName='active'>
+                            New Question
+                        </NavLink>
+                    </li>
                     {username === null &&
                         <li>
                             <NavLink to='/signin' activeClassName='active'>

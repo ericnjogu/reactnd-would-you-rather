@@ -6,6 +6,7 @@ import {handleInitialData} from '../actions/shared'
 import Home from './Home'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Nav from "./Nav";
+import NewQuestion from "./NewQuestion";
 
 class App extends Component {
 
@@ -26,6 +27,7 @@ class App extends Component {
                             : <div>
                                 <Route path='/' exact component={Home}/>
                                 <Route path='/signin' component={SignIn }/>
+                                <Route path='/new-question' component={NewQuestion }/>
                             </div>
                         }
                     </div>
