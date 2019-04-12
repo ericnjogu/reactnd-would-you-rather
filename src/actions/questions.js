@@ -5,7 +5,7 @@ import {addAnswerToUser, addQuestionToUser, removeAnswerFromUser} from '../actio
 export const RECEIVE_QUESTIONS = "RECEIVE QUESTIONS"
 export const ANSWER_QUESTION = 'ANSWER QUESTION'
 export const SAVE_QUESTION = 'SAVE QUESTION'
-export const REMOVE_ANSWER = 'REMOVE ANSWER'
+export const REMOVE_ANSWER_FROM_QUESTION = 'REMOVE ANSWER'
 
 
 /**
@@ -30,8 +30,10 @@ export function handleSaveQuestion(question) {
         dispatch(showLoading())
 
         return _saveQuestion(question)
-            .then(savedQuestion => dispatch(saveQuestion(savedQuestion)))
-            .then(savedQuestion => dispatch(addQuestionToUser(savedQuestion)))
+            .then(savedQuestion => {
+                dispatch(saveQuestion(savedQuestion))
+                dispatch(addQuestionToUser(savedQuestion))
+                })
             .then(() => dispatch(hideLoading()))
     }
 }
@@ -45,7 +47,7 @@ export function saveQuestionAnswer(answer) {
 
 export function removeQuestionAnswer(answer) {
     return {
-        type: REMOVE_ANSWER,
+        type: REMOVE_ANSWER_FROM_QUESTION,
         answer
     }
 }
