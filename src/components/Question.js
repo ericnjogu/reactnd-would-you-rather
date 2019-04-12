@@ -1,6 +1,7 @@
 import React from 'react';
 import {Component} from 'react'
 import {connect} from 'react-redux'
+import {handleSaveQuestionAnswer} from '../actions/questions'
 
 class Question extends Component {
     state = {
@@ -9,6 +10,12 @@ class Question extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        const answer = this.state.chosenOption
+        const {dispatch, authedUser, question} = this.props
+        const qid = question.id
+        dispatch(handleSaveQuestionAnswer(
+        { authedUser, qid, answer }
+        ))
     }
 
     updateOption = (e) => {
@@ -48,6 +55,7 @@ function mapStateToProps({authedUser, questions}, props) {
     //const {id}  = props.match.params
     // TODO comment out
     const id = '8xf0y6ziyjabvozdd253nd'
+    authedUser = 'sarahedo'
     return {
         authedUser,
         question:questions[id]
