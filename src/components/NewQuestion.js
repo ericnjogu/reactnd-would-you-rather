@@ -1,14 +1,16 @@
 import React from 'react';
 import {Component} from 'react'
 import {connect} from 'react-redux'
-//import {Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import PrivateComponent from "./PrivateComponent"
+import {handleSaveQuestion} from '../actions/questions'
 
 class NewQuestion extends Component {//PrivateComponent {
 
     state = {
         option1:'',
-        option2:''
+        option2:'',
+        submittedQuestion:null
     }
 
     updateText = (e, option) => {
@@ -23,6 +25,28 @@ class NewQuestion extends Component {//PrivateComponent {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        // clear 'view saved question link'
+        this.setState((oldState) => ({
+                ...oldState,
+                submittedQuestion: null
+            })
+        )
+        // TODO - to change to const
+        let {authedUser, dispatch} = this.props
+        // TODO for testing only
+        authedUser = 'johndoe'
+
+        const question = {
+            optionOneText: this.state.option1,
+            optionTwoText: this.state.option2,
+            author: authedUser
+        };
+        dispatch(handleSaveQuestion(question))
+        this.setState((oldState) => ({
+                ...oldState,
+            submittedQuestion: question
+            })
+        )
     }
 
     render() {
@@ -30,6 +54,9 @@ class NewQuestion extends Component {//PrivateComponent {
         return <div>
             {/*redirect*/}
             <h2>New Question</h2>
+            {/* show link to saved question if successfully submitted*/}
+            {this.state.submittedQuestion && this.props.savedQuestion
+            && <a href={`/question/${this.props.savedQuestion.id}`}> View saved question</a>}
             <h3>Would you rather?</h3>
             <form onSubmit={this.handleSubmit}>
                 <input value={this.state.option1} type='text' placeholder='Option 1'
@@ -46,8 +73,10 @@ class NewQuestion extends Component {//PrivateComponent {
 
 function mapStateToProps(state) {
     const {authedUser} = state
+    const savedQuestion = state.questions.savedQuestion
     return {
-        authedUser
+        authedUser,
+        savedQuestion
     }
 }
 
