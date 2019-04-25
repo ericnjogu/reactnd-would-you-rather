@@ -15,13 +15,28 @@ export default function questions(state = {}, action) {
             }
         case ANSWER_QUESTION:
             const { authedUser, qid, answer } = action.answer
-            return {
-                ...state,
+            // clear current selections
+        const clearedState = {
+            ...state,
                 [qid]: {
-                    ...state[qid],
+            ...state[qid],
+                    ['optionOne']: {
+                ...state[qid]['optionOne'],
+                        votes: state[qid]['optionOne'].votes.filter(userName => userName !== authedUser)
+                },
+                    ['optionTwo']: {
+                        ...state[qid]['optionTwo'],
+                        votes: state[qid]['optionTwo'].votes.filter(userName => userName !== authedUser)
+                    }
+            }
+        }
+            return {
+                ...clearedState,
+                [qid]: {
+                    ...clearedState[qid],
                     [answer]: {
-                        ...state[qid][answer],
-                        votes: state[qid][answer].votes.concat([authedUser])
+                        ...clearedState[qid][answer],
+                        votes: clearedState[qid][answer].votes.concat([authedUser])
                     }
                 }
             }
