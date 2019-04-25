@@ -26,19 +26,25 @@ class Question extends Component {
     }
 
     render() {
-        const {question} = this.props
+        const {question, authedUser} = this.props
         if (question) {
+            const optionAnswered = question.optionOne.votes.includes(authedUser)
             return (
                 <div>
                     <h3>Would you rather?</h3>
                     <form onSubmit={this.handleSubmit}>
                         <label htmlFor='optionOne'>{question.optionOne.text}</label>
                         <input value='optionOne' type='radio' id='optionOne'
-                               onClick={this.updateOption} name='answer'/>
+                               onClick={this.updateOption} name='answer'
+                               defaultChecked={optionAnswered}
+                        />
                         <h4>OR</h4>
                         <label htmlFor='optionTwo'>{question.optionTwo.text}</label>
                         <input value='optionTwo' type='radio' id='optionTwo'
-                               onClick={this.updateOption} name='answer'/>
+                               onClick={this.updateOption}
+                               name='answer'
+                               defaultChecked={question.optionTwo.votes.includes(authedUser)}
+                        />
                         <p/>
                         <button type='submit' disabled={this.state.chosenOption === ''}>Answer</button>
                     </form>
