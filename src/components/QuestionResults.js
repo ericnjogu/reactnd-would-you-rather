@@ -7,18 +7,24 @@ class QuestionResults extends Component {
     render() {
         const {question, authedUser} = this.props
         if (question) {
-            const totalVotes = question.optionOne.votes.length + question.optionTwo.votes.length
+            const optionOneVoteCount = question.optionOne.votes.length;
+            const optionTwoVoteCount = question.optionTwo.votes.length;
+            const totalVotes = optionOneVoteCount + optionTwoVoteCount
             const option1Answered = question.optionOne.votes.includes(authedUser)
-            const option1Votes = question.optionOne.votes.length / totalVotes * 100
+            const option1VotesPercent = optionOneVoteCount / totalVotes * 100
             const option2Answered = question.optionTwo.votes.includes(authedUser)
-            const option2Votes = question.optionTwo.votes.length / totalVotes * 100
+            const option2VotesPercent = optionTwoVoteCount / totalVotes * 100
             return (
                 <div>
                     <h3>Would you rather?</h3>
                     <p>(Chosen answer shown in bold)</p>
-                    <div style={option1Answered ? {fontWeight:'bold'} : null}>{question.optionOne.text} ({isNaN(option1Votes) ? 0 : option1Votes}%)</div>
-                        <h4>OR</h4>
-                    <div style={option2Answered ? {fontWeight:'bold'} : null}>{question.optionTwo.text} ({isNaN(option2Votes) ? 0 : option2Votes}%)</div>
+                    <div style={option1Answered ? {fontWeight:'bold'} : null}>
+                        {question.optionOne.text} - {`${isNaN(option1VotesPercent) ? 0 : option1VotesPercent}%, ${optionOneVoteCount} vote(s)`}
+                    </div>
+                        <p>OR</p>
+                    <div style={option2Answered ? {fontWeight:'bold'} : null}>
+                        {question.optionTwo.text} - {`${isNaN(option2VotesPercent) ? 0 : option2VotesPercent}%, ${optionTwoVoteCount} vote(s)`}
+                    </div>
                 </div>
             )
         } else {
