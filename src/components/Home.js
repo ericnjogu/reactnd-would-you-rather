@@ -31,14 +31,14 @@ class Home extends PrivateComponent {
 
         return <div>
                 {redirect}
-                <label htmlFor='answered'>answered</label>
-                <input value='answered' type='radio' id='answered'
-                       onClick={this.updateOption} name='questions'
-                />
                 <label htmlFor='unanswered'>unanswered</label>
                 <input value='unanswered' type='radio' id='unanswered'
                        onClick={this.updateOption}
                        name='questions' defaultChecked={true}
+                />
+                <label htmlFor='answered'>answered</label>
+                <input value='answered' type='radio' id='answered'
+                       onClick={this.updateOption} name='questions'
                 />
             <ol>
                 {this.filterQuestions(questions, authedUser, users)}
