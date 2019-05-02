@@ -14,7 +14,11 @@ class Home extends PrivateComponent {
         return (this.state.show === 'answered'
             ? Object.keys(questions).filter(id => questions[id].optionOne.votes.includes(authedUser) || questions[id].optionTwo.votes.includes(authedUser))
             : Object.keys(questions).filter(id => ! questions[id].optionOne.votes.includes(authedUser) && ! questions[id].optionTwo.votes.includes(authedUser)))
-        .map(id => <li key={id}>{`${users[questions[id].author].name} asks:`}<Link to={`question/${id}`}> {`${questions[id].optionOne.text} or ${questions[id].optionTwo.text}`}</Link></li>)
+            .map(id => [id, questions[id].timestamp])
+            .sort((first, second) =>  second[1] - first[1])
+        .map(id => <li key={id}>
+            {`${users[questions[id[0]].author].name} asks:`}<Link to={`question/${id[0]}`}> {`${questions[id[0]].optionOne.text} or ${questions[id[0]].optionTwo.text}`}</Link>
+        </li>)
     }
 
     updateOption = (e) => {
