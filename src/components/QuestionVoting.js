@@ -30,7 +30,7 @@ class QuestionVoting extends PrivateComponent {
 
     render() {
         const redirect = super.render()
-        const {question, authedUser} = this.props
+        const {question, authedUser, user} = this.props
         if (question) {
             const optionOneAnswered = question.optionOne.votes.includes(authedUser)
             const optionTwoAnswered = question.optionTwo.votes.includes(authedUser)
@@ -40,6 +40,7 @@ class QuestionVoting extends PrivateComponent {
                     <div>
                         {redirect}
                         <h3>Would you rather?</h3>
+                        <img src={`../${user.avatarURL}`} alt={`Avatar of ${user.name}`} className='avatar'/>
                         <form onSubmit={this.handleSubmit}>
                             <label htmlFor='optionOne'>{question.optionOne.text}</label>
                             <input value='optionOne' type='radio' id='optionOne'
@@ -64,12 +65,16 @@ class QuestionVoting extends PrivateComponent {
     }
 }
 
-function mapStateToProps({authedUser, questions}, props) {
+function mapStateToProps({authedUser, questions, users}, props) {
     const {id}  = props.match.params
-    return {
+    console.log('question ID', id)
+    const question = questions[id];
+    const map = {
         authedUser,
-        question:questions[id]
+        question,
+        user : question ? users[question.author] : null
     }
+    return map
 }
 
 export default withRouter(connect(mapStateToProps)(QuestionVoting))
