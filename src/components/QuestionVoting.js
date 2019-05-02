@@ -4,7 +4,7 @@ import {handleSaveQuestionAnswer} from '../actions/questions'
 import {withRouter} from 'react-router-dom'
 import PrivateComponent from "./PrivateComponent";
 
-class Question extends PrivateComponent {
+class QuestionVoting extends PrivateComponent {
     state = {
         chosenOption: ''
     }
@@ -68,4 +68,4 @@ function mapStateToProps({authedUser, questions}, props) {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(Question))
+export default withRouter(connect(mapStateToProps)(QuestionVoting))

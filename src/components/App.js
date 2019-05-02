@@ -7,7 +7,7 @@ import Home from './Home'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Nav from "./Nav";
 import NewQuestion from "./NewQuestion";
-import Question from "./Question";
+import QuestionVoting from "./QuestionVoting";
 import QuestionResults from "./QuestionResults";
 import LeaderBoard from "./LeaderBoard";
 
@@ -33,7 +33,7 @@ class App extends Component {
                                 <Route path='/' exact component={Home}/>
                                 <Route path='/signin' component={SignIn }/>
                                 <Route path='/new-question' component={NewQuestion }/>
-                                <Route path='/question/:id' exact component={Question }/>
+                                <Route path='/question/:id' exact component={QuestionVoting }/>
                                 <Route path='/question/:id/results' component={QuestionResults }/>
                                 <Route path='/leaderboard' exact component={LeaderBoard}/>
                             </div>
