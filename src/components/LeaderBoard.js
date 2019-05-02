@@ -1,19 +1,15 @@
-import React, {Component} from 'react';
-// todo uncomment
-//import PrivateComponent from './PrivateComponent'
+import React from 'react';
+import PrivateComponent from './PrivateComponent'
 import {connect} from 'react-redux'
 
-// todo uncomment
-class LeaderBoard extends Component { //PrivateComponent {
-
+class LeaderBoard extends PrivateComponent {
 
     render() {
-        // todo uncomment, add redirect to developed content's wrapping div 
-        /*const redirect = super.render()
-        return <div>{redirect}Home</div>*/
+        const redirect = super.render()
         const {ranking, users} = this.props
 
         return <div>
+            {redirect}
             <h3>Leader Board</h3>
             <ol>
                 {ranking.map(idCount => <li key={idCount[0]}>
