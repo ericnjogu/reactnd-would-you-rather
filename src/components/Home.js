@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-// todo uncomment
-//import PrivateComponent from './PrivateComponent'
+import React from 'react';
+
+import PrivateComponent from './PrivateComponent'
 import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
 
 // todo uncomment
-class Home extends Component { //PrivateComponent {
+class Home extends PrivateComponent {
     state = {
         show: 'unanswered'
     }
@@ -25,15 +25,12 @@ class Home extends Component { //PrivateComponent {
     }
 
     render() {
-        // todo uncomment, add redirect to developed content's wrapping div 
-        /*const redirect = super.render()
-        return <div>{redirect}Home</div>*/
-        // todo add authedUser
-        const {questions, users} = this.props
-        // todo remove
-        const authedUser = 'johndoe'
+        const redirect = super.render()
+        const {questions, users, authedUser} = this.props
+
 
         return <div>
+                {redirect}
                 <label htmlFor='answered'>answered</label>
                 <input value='answered' type='radio' id='answered'
                        onClick={this.updateOption} name='questions'
