@@ -1,7 +1,5 @@
 import React from 'react';
-import {Component} from 'react'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
 import PrivateComponent from "./PrivateComponent"
 import {handleSaveQuestion} from '../actions/questions'
 
@@ -32,9 +30,8 @@ class NewQuestion extends PrivateComponent {
             })
         )
         // TODO - to change to const
-        let {authedUser, dispatch} = this.props
-        // TODO for testing only
-        authedUser = 'johndoe'
+        const {authedUser, dispatch} = this.props
+
 
         const question = {
             optionOneText: this.state.option1,
