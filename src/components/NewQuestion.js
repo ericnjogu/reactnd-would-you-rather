@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import PrivateComponent from "./PrivateComponent"
 import {handleSaveQuestion} from '../actions/questions'
+import {withRouter} from 'react-router-dom'
 
 class NewQuestion extends PrivateComponent {
 
@@ -29,7 +30,6 @@ class NewQuestion extends PrivateComponent {
                 submittedQuestion: null
             })
         )
-        // TODO - to change to const
         const {authedUser, dispatch} = this.props
 
 
@@ -44,6 +44,7 @@ class NewQuestion extends PrivateComponent {
             submittedQuestion: question
             })
         )
+        this.props.history.push('/')
     }
 
     render() {
@@ -77,4 +78,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(NewQuestion)
+export default withRouter(connect(mapStateToProps)(NewQuestion))
