@@ -2,6 +2,7 @@ import React from 'react';
 import {Component} from 'react'
 import {connect} from 'react-redux'
 import {handleSaveQuestionAnswer} from '../actions/questions'
+import {withRouter} from 'react-router-dom'
 
 class Question extends Component {
     state = {
@@ -16,6 +17,7 @@ class Question extends Component {
         dispatch(handleSaveQuestionAnswer(
         { authedUser, qid, answer }
         ))
+        this.props.history.push(`question/${qid}/results`)
     }
 
     updateOption = (e) => {
@@ -68,4 +70,4 @@ function mapStateToProps({authedUser, questions}, props) {
     }
 }
 
-export default connect(mapStateToProps)(Question)
+export default withRouter(connect(mapStateToProps)(Question))
