@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {handleSaveQuestionAnswer} from '../actions/questions'
 import {withRouter} from 'react-router-dom'
 import PrivateComponent from "./PrivateComponent";
+import {Redirect} from 'react-router-dom'
 
 class QuestionVoting extends PrivateComponent {
     state = {
@@ -31,29 +32,32 @@ class QuestionVoting extends PrivateComponent {
         const redirect = super.render()
         const {question, authedUser} = this.props
         if (question) {
-            const optionAnswered = question.optionOne.votes.includes(authedUser)
-            return (
-                <div>
-                    {redirect}
-                    <h3>Would you rather?</h3>
-                    <form onSubmit={this.handleSubmit}>
-                        <label htmlFor='optionOne'>{question.optionOne.text}</label>
-                        <input value='optionOne' type='radio' id='optionOne'
-                               onClick={this.updateOption} name='answer'
-                               defaultChecked={optionAnswered}
-                        />
-                        <h4>OR</h4>
-                        <label htmlFor='optionTwo'>{question.optionTwo.text}</label>
-                        <input value='optionTwo' type='radio' id='optionTwo'
-                               onClick={this.updateOption}
-                               name='answer'
-                               defaultChecked={question.optionTwo.votes.includes(authedUser)}
-                        />
-                        <p/>
-                        <button type='submit' disabled={this.state.chosenOption === ''}>Answer</button>
-                    </form>
-                </div>
-            )
+            const optionOneAnswered = question.optionOne.votes.includes(authedUser)
+            const optionTwoAnswered = question.optionTwo.votes.includes(authedUser)
+            return optionOneAnswered || optionTwoAnswered
+                ? <Redirect to={`/question/${question.id}/results`}/>
+                : (
+                    <div>
+                        {redirect}
+                        <h3>Would you rather?</h3>
+                        <form onSubmit={this.handleSubmit}>
+                            <label htmlFor='optionOne'>{question.optionOne.text}</label>
+                            <input value='optionOne' type='radio' id='optionOne'
+                                   onClick={this.updateOption} name='answer'
+                                   defaultChecked={optionOneAnswered}
+                            />
+                            <h4>OR</h4>
+                            <label htmlFor='optionTwo'>{question.optionTwo.text}</label>
+                            <input value='optionTwo' type='radio' id='optionTwo'
+                                   onClick={this.updateOption}
+                                   name='answer'
+                                   defaultChecked={optionTwoAnswered}
+                            />
+                            <p/>
+                            <button type='submit' disabled={this.state.chosenOption === ''}>Answer</button>
+                        </form>
+                    </div>
+                )
         } else {
             return null
         }
