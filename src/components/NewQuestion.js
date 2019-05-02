@@ -5,7 +5,7 @@ import {Redirect} from 'react-router-dom'
 import PrivateComponent from "./PrivateComponent"
 import {handleSaveQuestion} from '../actions/questions'
 
-class NewQuestion extends Component {//PrivateComponent {
+class NewQuestion extends PrivateComponent {
 
     state = {
         option1:'',
@@ -50,9 +50,9 @@ class NewQuestion extends Component {//PrivateComponent {
     }
 
     render() {
-        //const redirect = super.render()
+        const redirect = super.render()
         return <div>
-            {/*redirect*/}
+            {redirect}
             <h2>New Question</h2>
             {/* show link to saved question if successfully submitted*/}
             {this.state.submittedQuestion && this.props.savedQuestion
