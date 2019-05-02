@@ -12,9 +12,9 @@ class QuestionResults extends PrivateComponent {
             const optionTwoVoteCount = question.optionTwo.votes.length;
             const totalVotes = optionOneVoteCount + optionTwoVoteCount
             const option1Answered = question.optionOne.votes.includes(authedUser)
-            const option1VotesPercent = optionOneVoteCount / totalVotes * 100
+            const option1VotesPercent = Math.round(optionOneVoteCount / totalVotes * 100)
             const option2Answered = question.optionTwo.votes.includes(authedUser)
-            const option2VotesPercent = optionTwoVoteCount / totalVotes * 100
+            const option2VotesPercent = Math.round(optionTwoVoteCount / totalVotes * 100)
             return (
                 <div>
                     {redirect}
