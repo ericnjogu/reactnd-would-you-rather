@@ -19,11 +19,11 @@ export default function questions(state = {}, action) {
             ...state,
                 [qid]: {
             ...state[qid],
-                    ['optionOne']: {
+                    'optionOne': {
                 ...state[qid]['optionOne'],
                         votes: state[qid]['optionOne'].votes.filter(userName => userName !== authedUser)
                 },
-                    ['optionTwo']: {
+                    'optionTwo': {
                         ...state[qid]['optionTwo'],
                         votes: state[qid]['optionTwo'].votes.filter(userName => userName !== authedUser)
                     }
