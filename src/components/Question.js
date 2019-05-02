@@ -1,10 +1,10 @@
 import React from 'react';
-import {Component} from 'react'
 import {connect} from 'react-redux'
 import {handleSaveQuestionAnswer} from '../actions/questions'
 import {withRouter} from 'react-router-dom'
+import PrivateComponent from "./PrivateComponent";
 
-class Question extends Component {
+class Question extends PrivateComponent {
     state = {
         chosenOption: ''
     }
@@ -28,6 +28,7 @@ class Question extends Component {
     }
 
     render() {
+        const redirect = super.render()
         const {question, authedUser} = this.props
         if (question) {
             const optionAnswered = question.optionOne.votes.includes(authedUser)
