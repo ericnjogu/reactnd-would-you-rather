@@ -32,7 +32,6 @@ class NewQuestion extends PrivateComponent {
         )
         const {authedUser, dispatch} = this.props
 
-
         const question = {
             optionOneText: this.state.option1,
             optionTwoText: this.state.option2,
@@ -52,9 +51,6 @@ class NewQuestion extends PrivateComponent {
         return <div>
             {redirect}
             <h2>New Question</h2>
-            {/* show link to saved question if successfully submitted*/}
-            {this.state.submittedQuestion && this.props.savedQuestion
-            && <a href={`/question/${this.props.savedQuestion.id}`}> View saved question</a>}
             <h3>Would you rather?</h3>
             <form onSubmit={this.handleSubmit}>
                 <input value={this.state.option1} type='text' placeholder='Option 1'
@@ -71,10 +67,8 @@ class NewQuestion extends PrivateComponent {
 
 function mapStateToProps(state) {
     const {authedUser} = state
-    const savedQuestion = state.questions.savedQuestion
     return {
         authedUser,
-        savedQuestion
     }
 }
 
