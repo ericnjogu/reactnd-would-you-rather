@@ -33,6 +33,7 @@ class Question extends Component {
             const optionAnswered = question.optionOne.votes.includes(authedUser)
             return (
                 <div>
+                    {redirect}
                     <h3>Would you rather?</h3>
                     <form onSubmit={this.handleSubmit}>
                         <label htmlFor='optionOne'>{question.optionOne.text}</label>
@@ -59,11 +60,7 @@ class Question extends Component {
 }
 
 function mapStateToProps({authedUser, questions}, props) {
-    // TODO to uncomment once <Route path='/question/:id' component={Question }/> is in place in App component
-    //const {id}  = props.match.params
-    // TODO comment out
-    const id = '8xf0y6ziyjabvozdd253nd'
-    authedUser = 'sarahedo'
+    const {id}  = props.match.params
     return {
         authedUser,
         question:questions[id]
