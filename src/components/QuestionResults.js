@@ -36,11 +36,7 @@ class QuestionResults extends PrivateComponent {
 }
 
 function mapStateToProps({authedUser, questions}, props) {
-    // TODO to uncomment once <Route path='/question/:id/results' component={QuestionResults }/> is in place in App component
-    //const {id}  = props.match.params
-    // TODO comment out
-    const id = '8xf0y6ziyjabvozdd253nd'
-    authedUser = 'sarahedo'
+    const {id}  = props.match.params
     return {
         authedUser,
         question:questions[id]
