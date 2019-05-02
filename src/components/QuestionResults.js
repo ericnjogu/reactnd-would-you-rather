@@ -1,10 +1,11 @@
 import React from 'react';
-import {Component} from 'react'
 import {connect} from 'react-redux'
+import PrivateComponent from "./PrivateComponent";
 
-class QuestionResults extends Component {
+class QuestionResults extends PrivateComponent {
 
     render() {
+        const redirect = super.render()
         const {question, authedUser} = this.props
         if (question) {
             const optionOneVoteCount = question.optionOne.votes.length;
@@ -16,6 +17,7 @@ class QuestionResults extends Component {
             const option2VotesPercent = optionTwoVoteCount / totalVotes * 100
             return (
                 <div>
+                    {redirect}
                     <h3>Would you rather?</h3>
                     <p>(Chosen answer shown in bold)</p>
                     <div style={option1Answered ? {fontWeight:'bold'} : null}>
