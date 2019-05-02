@@ -17,7 +17,7 @@ class Question extends PrivateComponent {
         dispatch(handleSaveQuestionAnswer(
         { authedUser, qid, answer }
         ))
-        this.props.history.push(`question/${qid}/results`)
+        this.props.history.push(`/question/${qid}/results`)
     }
 
     updateOption = (e) => {
