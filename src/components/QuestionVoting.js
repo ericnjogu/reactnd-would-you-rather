@@ -60,7 +60,7 @@ class QuestionVoting extends PrivateComponent {
                     </div>
                 )
         } else {
-            return <h2>404: The requested question does not exist</h2>
+            return <h2>{redirect}404: The requested question does not exist</h2>
         }
     }
 }

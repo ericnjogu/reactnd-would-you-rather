@@ -30,7 +30,7 @@ class QuestionResults extends PrivateComponent {
                 </div>
             )
         } else {
-            return null
+            return <h2>{redirect}404: The requested question does not exist</h2>
         }
     }
 }
